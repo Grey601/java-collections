@@ -92,16 +92,55 @@ class GameTest {
         Assertions.assertThrows(NotFoundException.class, () -> game.round("Григорий", "Елисей"));
     }
 
-//    @Test
-//    public void firstPlayerHasNoName() {
-//        Game game = new Game();
-//
-//        Player player1 = new Player(1, null, 70);
-//        Player player2 = new Player(2, "Василий", 50);
-//
-//        game.register(player1);
-//        game.register(player2);
-//
-//        Assertions.assertThrows(NullPointerException.class, () -> game.round(null, "Василий"));
-//    }
+    @Test
+    public void firstPlayerHasNoName() {
+        Game game = new Game();
+
+        Player player1 = new Player(1, null, 70);
+        Player player2 = new Player(2, "Василий", 50);
+
+        game.register(player1);
+        game.register(player2);
+
+        Assertions.assertThrows(NullPointerException.class, () -> game.round(null, "Василий"));
+    }
+
+    @Test
+    public void secondPlayerHasNoName() {
+        Game game = new Game();
+
+        Player player1 = new Player(1, "Григорий", 70);
+        Player player2 = new Player(2, null, 50);
+
+        game.register(player1);
+        game.register(player2);
+
+        Assertions.assertThrows(NullPointerException.class, () -> game.round("Григорий", null));
+    }
+
+    @Test
+    public void bothPlayersHaveNoNames() {
+        Game game = new Game();
+
+        Player player1 = new Player(1, null, 70);
+        Player player2 = new Player(2, null, 50);
+
+        game.register(player1);
+        game.register(player2);
+
+        Assertions.assertThrows(NullPointerException.class, () -> game.round(null, null));
+    }
+
+    @Test
+    public void bothPlayersHaveTheSameNames() {
+        Game game = new Game();
+
+        Player player1 = new Player(1, "Григорий", 70);
+        Player player2 = new Player(2, "Григорий", 50);
+
+        game.register(player1);
+        game.register(player2);
+
+        Assertions.assertThrows(SameNamesException.class, () -> game.round("Григорий", "Григорий"));
+    }
 }

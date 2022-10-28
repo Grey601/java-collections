@@ -28,6 +28,11 @@ public class Game {
             throw new NotFoundException(playerName2);
         }
 
+        if (playerName1 == playerName2) {
+            throw new SameNamesException();
+
+        }
+
         if (player1.getStrength() == player2.getStrength()) {
             return 0;
         }
